@@ -1,5 +1,6 @@
 {
   "name": "TripPlanner",
+  "projectId": "704faa73-8936-46fe-86ce-405a552c01ec",
   "description": "Robot that provide information about trip opportunities ",
   "main": "Main.xaml",
   "dependencies": {

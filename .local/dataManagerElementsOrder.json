@@ -75,9 +75,10 @@
         "email&Sequence_1"
       ],
       "ArgumentsSectionElementsOrder": [
-        "ReceiverEmail",
-        "Letter",
-        "Subject"
+        "in_EmailURL",
+        "in_Letter_Subject",
+        "in_Letter_Text",
+        "in_Receiver_Email"
       ],
       "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null
@@ -87,6 +88,7 @@
       "SortBy": 0,
       "VariablesSectionElementsOrder": [],
       "ArgumentsSectionElementsOrder": [
+        "in_Decode_SiteURL",
         "out_PasswordDecoded",
         "in_PasswordEncoded"
       ],
@@ -105,6 +107,33 @@
         "out_TransactionField2",
         "out_TransactionID",
         "io_dt_TransactionData"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Framework/View/EmailLogin/Email_Login.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "Password_Decrypted&Sequence_2",
+        "Login_URL&Sequence_2",
+        "Password&Sequence_2",
+        "Email&Sequence_2"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_Email_Login_URL"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Framework/View/EmailLogin/EnterEmailCredentials.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": [
+        "in_Login",
+        "in_Password",
+        "in_LoginURL"
       ],
       "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null
