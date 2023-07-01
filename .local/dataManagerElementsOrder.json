@@ -62,6 +62,25 @@
       ],
       "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null
+    },
+    {
+      "Path": "Framework/View/GetSubscribersEmails/GetSubscribersEmails.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "UserName&Sequence_1",
+        "filteredAddresses&Sequence_1",
+        "EmailAddress&Sequence_2",
+        "dt_email_addresses&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_password",
+        "in_username",
+        "in_OrchestratorQueueName",
+        "in_OrchestratorQueueFolder",
+        "in_filterBy_keyword"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
     }
   ]
 }
