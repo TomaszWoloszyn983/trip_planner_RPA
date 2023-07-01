@@ -5,7 +5,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1524,1613</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1102,1621</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Email_Login_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -104,19 +104,19 @@
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Email_Login" sap:VirtualizedContainerService.HintSize="1112,1548" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Email_Login" sap:VirtualizedContainerService.HintSize="1112,1556" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Edge: Sign in – Google accounts" sap:VirtualizedContainerService.HintSize="1050,1437" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="73ff3d84-41ce-47da-b489-9f155015c836" Version="V2">
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Edge: Sign in – Google accounts" sap:VirtualizedContainerService.HintSize="1050,1445" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" IsIncognito="False" OpenMode="IfNotOpen" ScopeGuid="73ff3d84-41ce-47da-b489-9f155015c836" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1016,1220" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1016,1227" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="Email" />
               <Variable x:TypeArguments="ss:SecureString" Name="Password" />
@@ -128,23 +128,29 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="EmailCredentials" CacheStrategy="None" DisplayName="Get Credential" FolderPath="Trip-Planner" sap:VirtualizedContainerService.HintSize="954,143" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[Password]" Username="[Email]" />
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\Controller\Util\DecodePassword.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="954,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\Controller\Util\DecodePassword.xaml">
+            <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="EmailCredentials" CacheStrategy="None" DisplayName="Get Credential" FolderPath="Trip-Planner" sap:VirtualizedContainerService.HintSize="334,144" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[Password]" Username="[Email]" />
+            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\Controller\Util\DecodePassword.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="954,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\Controller\Util\DecodePassword.xaml">
               <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="ss:SecureString" x:Key="in_PasswordEncoded">[Password]</InArgument>
-                <OutArgument x:TypeArguments="x:String" x:Key="out_PasswordDecoded">[Password_Decrypted]</OutArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="in_Decode_SiteURL">https://toolbox.googleapps.com/apps/encode_decode/</InArgument>
+                <InArgument x:TypeArguments="ss:SecureString" x:Key="in_PasswordEncoded">
+                  <VisualBasicValue x:TypeArguments="ss:SecureString" ExpressionText="Password" />
+                </InArgument>
+                <OutArgument x:TypeArguments="x:String" x:Key="out_PasswordDecoded">
+                  <VisualBasicReference x:TypeArguments="x:String" ExpressionText="Password_Decrypted" />
+                </OutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_Decode_SiteURL">
+                  <Literal x:TypeArguments="x:String">https://toolbox.googleapps.com/apps/encode_decode/</Literal>
+                </InArgument>
               </ui:InvokeWorkflowFile.Arguments>
             </ui:InvokeWorkflowFile>
-            <uix:NCheckState DisplayName="Check App State 'Choose an account'" sap:VirtualizedContainerService.HintSize="954,769" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="73ff3d84-41ce-47da-b489-9f155015c836" Version="V3">
+            <uix:NCheckState DisplayName="Check App State 'Choose an account'" sap:VirtualizedContainerService.HintSize="954,774" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="73ff3d84-41ce-47da-b489-9f155015c836" Version="V3">
               <uix:NCheckState.IfExists>
-                <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,552" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,555" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Use another account" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="73ff3d84-41ce-47da-b489-9f155015c836" Version="V3">
+                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click - Use another account" sap:VirtualizedContainerService.HintSize="388,158" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="73ff3d84-41ce-47da-b489-9f155015c836" Version="V3">
                     <uix:NClick.Target>
                       <uix:TargetAnchorable BrowserURL="https://accounts.google.com/AddSession/signinchooser?service=accountsettings&amp;continue=https%3A%2F%2Fmyaccount.google.com%2F&amp;ec=GAlAwAE&amp;hl=en-GB&amp;authuser=0&amp;flowName=GlifWebSignIn&amp;flowEntry=AddSession" CvTextArgument="Use another account" CvType="Text" DesignTimeRectangle="655, 800, 560, 60" DesignTimeScaleFactor="1.25" FriendlyName="'Use another account'" FullSelectorArgument="&lt;webctrl aria-role='link' idx='6' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aria-role='link' type='' tag='DIV' class='lCoei YZVTmd SmR8' aaname='' check:innerText='Use another account' /&gt;" Guid="f928d12b-3975-4c09-8e96-98cab24e9973" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAjQAAABACAYAAAANp+39AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAArdSURBVHhe7dz/axRJGsfx+8P2B4mgDEsSxBXJyirxCEpCkCxDhJxgQCIDSsBEDpkTwymB6B2XBDHhjuGExGMCSwxCwDMIGTx2EEbhTGDZn+65err7manudL6MG5O08254kZ2e6i9VCVsfq6r7d+K2tbcV/cHGxsbGxsbGlqnNMgyBho2NjY2NjS2z21cbaLQuAABgZ1/LZnWpB5pPv/wPAAAgUwg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0AAAg8wg0nvX/1GT51b9l6q9P5UZhVAYG/xD8/OOf/iz/+Oe/Uo8BAACHj0AT0RBz4feXd6QBR8ulHQ8AAA5PywcaHZXRUZhkaFE6WqMjMzpCkyyjx6WdDwAAHLyWDjQaSvyQogEmrZzRcKPl9lp+fyzL6LHj8s2xMVlK+359Wgb0+8vTUkn7/itXmep3bXNcRl+kfw8AaA0tHWhs1EV/+vs16Ng6Gh2d8Udj9L91n4Ua/7gvg0CjtgsuBJqDFP0ttmh4BnC0tWyg8dfM+Pt11MX2m+RojIYaG6n58mtqCDSKQHMUEGgAHF0tG2gsrCSnjWzURgOLhhULLsnRGJ1+sv3+CM7+I9AoAs1RQKABcHS1ZKCxMJKcalK6X1lI0Z+2L1nWws+XXUvTfKCpPH8g1y50SltwXE66rtyW2Vcb8eM2P8hicUh6OnJBIPgmd0YGC89k5b1XJkXy3O1n8zI6sya1ehnr9B7L0sI9GTwblT3RKT3D07Jai5/v0/s1mS3kpSun5zsubR3nZPBOSdasnNUv6dZy8H0j0GzI6tRIvT4nT+WluPAhfq1fXJmZ2zJ4Kqqz3tPVB7K47pV5MRZ8NzC5LIt3Gve1bWBK3L+2Y6+e812i3LtlmRy+5NWzW64Vy1LZjJervSlJ8co5aT8RltN6aPtWE+W2/I57RmSy7Nd3+7+bpVvhua1O9TacW5Mn3j36bWjHxPXLE7/tAOAQtWSgsekmXQvj7/fDi4UUfwrKL6vsPF922qm5QFN9OhR2cjnXYRbGZHy4P+ocz0jxZXTMZlWe9EUd/w9DMjo6JqNXu+WkHvedu04ydERWH3YH59ZjxqdKMjsxIr1B55eT3of2txPd74lcUFYDyvnvz4Tn1s/DC43w89bde9RxaxA4//25RjD47rrMa2f53gUBd3+Fvs5gf89VVyf3efxpeD3rjHsudLufGrDc9Syk+XV2YWbp1plgf1tHvxT0HNY2J1zH/DYqFwWa0x16veh8LgClBppaWQodenynDAw/ktm5aRnPn4vaf0QWo3asvXwgPVE9w/ZoBJa2vmlZi8JKZe66dOmxzslT8XbrcgEubLdGPer3Z6HRfe4prkblmg80be53pufocvfXaMNumXzt/kfxVNvdBWDdZ+036kLrLgEYAA5KSwYaW9Sb9rI8f8rJyqlk+FEWdtJGevZPc4Gm3lkteGVePZPJ51WpRR3nmgsmWmagHkJC1ee35bTbf/rOamx/3eaGrLxIjBbUFqQQhAJ3f8F+u1/thMuNsvXwMiTzQSdYkckL+jknA5Pefeg17veHYShfkmq0f7upJdsfhJI3jf2rxbCObaPhSE6tNBKc8/RN757Um8dh+/34LLxWFGg0DI0uJEa10qwvy5J3XbV6P2rfqaqrz6oUvwvPd2PGr2clDJUueE6Uf5VPP5fkWtCOl6RY9q77viyj7vi2DtduLuBZPTR4LvphYr0kheg6YYhrPtDE27ARnE7ftb+H6JxMOQE4gloy0Ni6mLSpIn/Br9lunYyN6Oj3ye/2T3OBplYeC/6V33Z2SCZmlmV1faMeZEKug9VRhWOXZHyuLIvPfY/lxrfuu457slIvn+LjhlTfh2qbv0ppWM9n0w92vyNS+ugflyj38l4QnupBIsbCjoWf3QPN+fuJv923j6VXzx9MTW3IfF7P1yk3HibrXJLxHu9aFmj8kaTduDaw9qjWXDh5/UjO27WtnkOlredzx9nvRkfWgnoU1+Jl1H/dOYP/btSj+FOijFMPbUEAaT7QbGlDvx7BPgINgKOrJQPNbmtfNKjo6I1OJaWN4hhbi5M2erN/lmU8GNnYJtBYp3OzXN+n6zAmrjbWQgRTIndsvYZ1dDvZ5lrvylLssakIk5OTwXUSgebiY1lLHB92pFG5KDi01//1v0NZ93m3QBMbkVIW9ILOuCpPLuv5dhK/r97Javx8qXTdznU5H00fmbZcON0WXHuXehqrx+BMct2Pz+qRl9mfU76P1bn5QLNzG+o+Ag2Ao6slA81+rX05mDU0O/+rvDqTDzoj/1/XtY/2L3rnY0UWb4VTID3BFFM0QlOfIkpI2xewUZMzUphZk0o0IlFZXZDxi7o/EWhSOr1YSNnTCE2/zEaLa3cNNIn98c7Y2rARkGL8OkcBJJgu8suksBGRtr4HsvTGRq0qsvLwurTbtfdphCYst7cRmnCazQLNbVmM/U4/yOyPuj8l0OzYhrqPQAPg6GrJQGNrX5JTRToyo+FE6SiOfq90BEZHY5LTTjbSs9Mozn5odJyP4k8h6fqPYHTAOuqKzF7RBaL9MuE/1VQeCzvVqGNauRuujei6UYo9ZVP5+4h06WjOhP/Ukok6s28TQai+NqbJQPOZa2iSIxh77YxtsXSyDWuvHrn7z0nPzYXwfpsINPV7+ot/T96iXb32DmtoZvOdwRqacV2rs+0ammUp/uDuuyMvs28afwu7r6FxwaVPP+ekMNc4X3UhnJL026zpQKNTkrGQBACHryUDja19URpu9LO/AHg7Fm5sSsr2J4PO/os/2RI8heI92eJ3vpW/5aMnY7Y+AXPtadTxflyViYvR1JELMPrUTf2pFv+Jn5gPMp8Py/hPRrXr00yfFWic3Z5y8u/jp2ikI6p/e7TYd++dcVXmhxJtaI9vuxCgj30H5ZoINDr6EoSD4CknfepnJHwkPHrCy65de23BU4OJu67ev332nnKqurDym59yumtPOTVCXL1cVN/waabPCTSN0Z2gHqfyjd8lAByylgw0ygKJhhQLJvZZR2g06Bgta6MxVsaO+7LTTb4NWZvz3uuinXLa+2Wc6qtpKcTeUTIkE8l3smxWg/fQ9Fqnru9PGZ7e+T00mxUpxd4Z0y2FqTUpxYJKE4FGpb2HJvV9ONF7ZoJyroOO1qTsvTN2dPRH30Njbahh7sq99PfQ7CXQONXyo8Q7f9z5ytGTU/61f+N7aJIjZlvfQ+N+x8+T9xx/N09wzYllWZmMt1lTbajrqPqi6+aGZD75vh0AOCQtG2h0VCUZUnYbadHv/QCkx6eVAwAAB6tlA43SgOIHmt1GW3S0xg80+jmtHAAAOFgtHWhU2kiNLQK26SYNOn6Q0f/ebTQHAAAcnJYPNErDiYYWCyw7Obg1MwAAYK8INB4NNjYio6M2OhKjP/Uz00sAABxdBBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5BBoAAJB5WwINGxsbGxsbG1vWtjDDiPwfZ4PzO/SpvHEAAAAASUVORK5CYII=" InformativeScreenshot="244f798b81d1a047e6e08ea41eb4f206.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='Sign in – Google accounts' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive">
                         <uix:TargetAnchorable.Anchors>
@@ -155,8 +161,8 @@
                       </uix:TargetAnchorable>
                     </uix:NClick.Target>
                   </uix:NClick>
-                  <uix:NGetUrl CurrentUrl="[Login_URL]" DisplayName="Get URL" sap:VirtualizedContainerService.HintSize="388,87" sap2010:WorkflowViewState.IdRef="NGetUrl_1" Version="V3" />
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\View\EmailLogin\EnterEmailCredentials.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Framework\View\EmailLogin\EnterEmailCredentials.xaml">
+                  <uix:NGetUrl CurrentUrl="[Login_URL]" DisplayName="Get URL" sap:VirtualizedContainerService.HintSize="388,88" sap2010:WorkflowViewState.IdRef="NGetUrl_1" Version="V3" />
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\View\EmailLogin\EnterEmailCredentials.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Framework\View\EmailLogin\EnterEmailCredentials.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
                       <InArgument x:TypeArguments="x:String" x:Key="in_LoginURL">[Login_URL]</InArgument>
                       <InArgument x:TypeArguments="x:String" x:Key="in_Password">[Password_Decrypted]</InArgument>
@@ -166,14 +172,14 @@
                 </Sequence>
               </uix:NCheckState.IfExists>
               <uix:NCheckState.IfNotExists>
-                <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,355" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,357" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <uix:NGetUrl CurrentUrl="[Login_URL]" DisplayName="Get URL" sap:VirtualizedContainerService.HintSize="388,87" sap2010:WorkflowViewState.IdRef="NGetUrl_2" Version="V3" />
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\View\EmailLogin\EnterEmailCredentials.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Framework\View\EmailLogin\EnterEmailCredentials.xaml">
+                  <uix:NGetUrl CurrentUrl="[Login_URL]" DisplayName="Get URL" sap:VirtualizedContainerService.HintSize="388,88" sap2010:WorkflowViewState.IdRef="NGetUrl_2" Version="V3" />
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\View\EmailLogin\EnterEmailCredentials.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Framework\View\EmailLogin\EnterEmailCredentials.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
                       <InArgument x:TypeArguments="x:String" x:Key="in_LoginURL">[Login_URL]</InArgument>
                       <InArgument x:TypeArguments="x:String" x:Key="in_Password">[Password_Decrypted]</InArgument>
