@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="GetSubscribersEmails" this:GetSubscribersEmails.in_filterBy_keyword="Trip Planner" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:this="clr-namespace:" xmlns:uasa="clr-namespace:UiPath.Activities.System.Arrays;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="GetSubscribersEmails" this:GetSubscribersEmails.in_filterBy_keyword="Trip Planner" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:this="clr-namespace:" xmlns:uasa="clr-namespace:UiPath.Activities.System.Arrays;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_filterBy_keyword" Type="InArgument(x:String)" />
     <x:Property Name="in_OrchestratorQueueFolder" Type="InArgument(x:String)" />
@@ -9,7 +9,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1524,3580</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>890,5309</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetSubscribersEmails_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -56,6 +56,8 @@
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Xml.Serialization</x:String>
       <x:String>UiPath.UIAutomationNext.Models.ExtractData</x:String>
+      <x:String>UiPath.Activities.System.Collections</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -118,9 +120,10 @@
       <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
       <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Loop through the emails retrieved from the email inbox and filter emails with subjects containing the keyword that is stored in argument in_filterBy_keyword.&#xA;&#xA;Extract email addresses from filtered email.&#xA;&#xA;Add the address to the filtered addresses list.&#xA;&#xA;Sent the filtered list to the Orchestrator Queue. " DisplayName="GetSubscribersEmails" sap:VirtualizedContainerService.HintSize="748,3515" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Loop through the emails retrieved from the email inbox and filter emails with subjects containing the keyword that is stored in argument in_filterBy_keyword.&#xA;&#xA;Extract email addresses from filtered email.&#xA;&#xA;Add the address to the filtered addresses list.&#xA;&#xA;Sent the filtered list to the Orchestrator Queue. " DisplayName="GetSubscribersEmails" sap:VirtualizedContainerService.HintSize="900,5244" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="dt_email_addresses" />
       <Variable x:TypeArguments="scg:List(x:String)" Name="filteredAddresses" />
@@ -132,130 +135,401 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Start Proces" sap:VirtualizedContainerService.HintSize="686,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Get Subscribers email started&quot;]" />
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="686,141" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Run login process&quot;]" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\View\EmailLogin\Email_Login.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="686,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\View\EmailLogin\Email_Login.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_Email_Login_URL">
-          <Literal x:TypeArguments="x:String">https://mail.google.com/mail/u/0/#inbox</Literal>
-        </InArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="686,141" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Login Process complete. Run Enter Credential process&quot;]" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\View\EmailLogin\EnterEmailCredentials.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="686,113" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Framework\View\EmailLogin\EnterEmailCredentials.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_LoginURL">
-          <Literal x:TypeArguments="x:String">https://mail.google.com/mail/u/0/#inbox</Literal>
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_Password">
-          <Literal x:TypeArguments="x:String">Whatever</Literal>
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_Login">
-          <Literal x:TypeArguments="x:String">Whatever</Literal>
-        </InArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="686,141" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Window open. Enter Credential process complete.&quot;]" />
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="686,2242" sap2010:WorkflowViewState.IdRef="TryCatch_1">
-      <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="648,1992" sap2010:WorkflowViewState.IdRef="Sequence_6">
+    <ui:LogMessage DisplayName="Log Message Start Proces" sap:VirtualizedContainerService.HintSize="838,143" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Get Subscribers email started&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="838,143" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Run login process&quot;]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="838,304" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,225" sap2010:WorkflowViewState.IdRef="Sequence_12">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Edge: Inbox (2) - trip.planner.rpa@gmail.com - Gmail" sap:VirtualizedContainerService.HintSize="586,322" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="54fd3a77-edb0-42a8-ae7e-016723dc3591" Version="V2">
-            <uix:NApplicationCard.Body>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\View\EmailLogin\Email_Login.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\View\EmailLogin\Email_Login.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Email_Login_URL">https://mail.google.com/mail/u/0/#inbox</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="838,143" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Login Process complete. Run Enter Credential process&quot;]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="838,304" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="450,225" sap2010:WorkflowViewState.IdRef="Sequence_13">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Framework\View\EmailLogin\EnterEmailCredentials.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="388,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Framework\View\EmailLogin\EnterEmailCredentials.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_LoginURL">https://mail.google.com/mail/u/0/#inbox</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Password">Whatever</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Login">Whatever</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="838,143" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Window open. Enter Credential process complete.&quot;]" />
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="838,3589" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Sequence sap:VirtualizedContainerService.HintSize="998,4957" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="scg:List(x:String)" Name="emailsList" />
+            <Variable x:TypeArguments="sd:DataTable" Default="[New System.Data.DataTable]" Name="ExtractDataTable" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="936,143" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Attach window&quot;]" />
+          <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'msedge.exe TRIP'" sap:VirtualizedContainerService.HintSize="936,4357" sap2010:WorkflowViewState.IdRef="WindowScope_2" InformativeScreenshot="32f6db71656deed58c56232851e09506" Selector="&lt;wnd app='msedge.exe' cls='Chrome_WidgetWin_1' title='Inbox* - trip.planner.rpa@gmail.com - *' /&gt;">
+            <ui:WindowScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
-                  <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Sequence_7">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                </Sequence>
-              </ActivityAction>
-            </uix:NApplicationCard.Body>
-            <uix:NApplicationCard.TargetApp>
-              <uix:TargetApp Area="58, 10, 1776, 1152" BrowserType="Edge" IconBase64="iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAABWoSURBVHhe7Z1tcFTXeccXtILE/eDQ2BRjI61W1G1MaA3SLrYDWKwkJoSpYyOEO01iZ5pMZzotsSfTKYk/tIwNAsed6Uw/pC8ZJhk7GJDBuIM7U0cSAiMJjHE+uJMXcKadFsdgITCgNwySTs9z99zV6nKlq7N7X8459/+b+Q9vYvfePTq/+5yXe5UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAETE20sX3X1yafXKnpolj/XVVH+rt6Zqa29t1Xfo9321qcd70kvqT9XU/J74cgC0hPUmFrLuyvqxzorHx7oqvz3eVbmVcvOtym+NHa147GZX5crBtxILxZebyy+WLZvXk65afaq2+oW+2upjfenqizzjp2tT7D1H6O9609UTPP08J06lq9q4KNa089cQLweAkrD2xLxbnck1493JHWNdyR6efv7nCXY8yVhPUU7wHEuyWx3J8bHO5Mf8647z//MC//Nqeg3xcvpzOpVadDJd/V3e8d/jHd7q4O/y8L9j9GfewV1D/0ZfQzL4OQ/9mb/GmZO8SnirttZ8YwKtYJ2Jz48frfzOxNHke7e6RCfnnZ7/mfHOzbgEXEP/Rl9jC4L+70R38ufjR5Pf5a+pbwXckU7f2ZdOff9kbfWH9lV9pg7vFfq/drXAX/d/eZ49s3jxHeLtAIgEdiRxx3h35TO88/+3dVXnHXmmDu8V+r9UGZAMuATOj3clv8c6EneKt9ODnnT1V06lU+9TZ+VXbdcOXU7oNa3XTqdOHa9Zsla8LQChQuU6v1qftDp+t3uHLif0mpYIupP/daOjYqN4W3XpTqU+05tOvfhObfUtMY4PNDSUOJWuHuHvua09kagQhwFAoPAxegUv1bfxjjnC3nbvvH6Gqgr+XmO3jiZf/J8fJz4jDkMtuu9ffBcv04/kS3T3DhtEaJ7gDH9P/uuhniVLFovDASAQ2M8Si/lV/yBd9XmJ7tphgwgfCljVAB8iHGHdibvE4ahB1/333cs74Cnq/G6dNIyIIcG5t9NVjeKwAPCVWz9LNvIr8Tnq/G6dNIxYE4VHk6dGuhL3isOKlhNVVQv4Fb83ys5vh4YdfEgw2puuwpAA+AaV/Pxq/7e8849SOe7WMcOMWC3oZScSC8QhRsOZurpK3vEO0jKdszNGlSlDgj/AkACUB5X8Y0crDoVd8nvFkkBH8hD710SlONTw6ampfk6FK79b6LjeSafO9mFIAEpklJf8E8eSZ63O5tIJo44YijwnDjdcetNLMvwqO0xXXLcOqEIwJAClwFhirpjlV6Lkny5UkYwfS46wo5WrxKGHg1X616SOU6nt1vFUij0k4CI4iFUC4EVUs/ylxqoCupLH2JkQhwI9taknaQ3ercOpGhoSnMQqAZgBKvmtWX5FS/7pQnsRPu2s+FNxGsFCN/X0plOndRMABUMC4Ia9sYeP90dULvmni3XMHcl3Q7mJqKemqvlUWr/Ob2fKKgGGBLEnP8ufVG6WXyZjPFxeE/z3TeK0gqOvpuonqs78y8RaJahNnT2beQBDgphy9bmqxomuSmVn+WVCArvZWfETcWrB0J1KfY53nvO8jHbtVLqFhgS/XbNi9Epzdhvbvn2uOE1gONTW/asf2nb9mw8oPcsvk4luqxI4/0l34nPiNP3n5NJUA+/89KAO1w6lYz5cs4INrn+IDTRlDl1qXoEhgeFQG1NbX889xK4+tcy6/96tQ+mY8W4+DOhINohT9Z+edOp7JpT/xfm/1Q+yS01ZLoFV7HJT9tzF5gyGBIZCbUttTG3d35BlV75hlgDEFuFt4nT9py9dvVeHtX+Z2ALob8ywq838m6IpOzKQ40OC1lasEhgCtSW1KbUttTG1tZECsOYBKn8qTttfWCIxp6+2ujeM+/zDTLEAKAP899f5FSI/JPgShgSaQ21olfxWm062s5ECoPmMrmQPY4k54vT9o++++z7LO8yv3zFcAHYKQ4J1GBLoCrXdJ03Zs1bJ72hfIwVADxntTP76fHvis+Ij8I8z6fSdvemqD4N4xFeUmU4AFCoXuQRG+2lIkEhglUATqK2ozajtCiW/MyYKgFYCuirOB/IMQbrvn3eYiyrf/FNKZhIAhZeP7HozVQOZg1glUB9qI2orajNqO7c2tWKgAMQTiC9cfTOA5wTEVQB2MCRQH2qbwiy/SxtOCQQgR9wFQCkMCZqz29qxSqAM1Ba3zfJ7BQKQAwLIxx4S5FcJMCSImsLGHq+S3xkIQA4IYGowJIgeqZLfGQhADgjg9thDAmvj0HasEoQFfdb0mdNnP+uS3xkIQA4IwD0YEoRLySW/MxCAHBDAzKEylDad4F6C4BhYn81Nu7FHNhCAHBCAd4qHBFgl8I/21oQ1y19Wye8MBCAHBDC72EOCy02rsHHIB+gznNXGHtlAAHJAAHIprBJgSFAyZc3yewUCkAMCkI89JLDuJcAqwazxZZbfKxCAHBBAabFuLy6sEuD2Yi8Kt+9an1lw7QIBSAIBlBcqY/k39DmayRYfKXDAr/r+zfJ7BQKQAwIoP1NXCfBzCWzys/x1wZb8zkAAckAA/sReJcgPCbBKENgsv1cgADkgAH+DVQLHQzpdPqNAAwHIAQH4n+JVgjgNCehcPZ/YE3QgADkggGBSvEpwPvfH94qP21im7uWP7nOHACSBAILNEC+DaQacZsLFR24coc7yewUCkIME0FdTBQEEmMIqgWFPHLJm+fk5RVryO2OoAMaDEsDe1RsXHF+69OLp1GLXjqRrVBIAxVol4FdIU1YJCiV//pxczzmSGCgA1j2XjXbOv3DizTv9F8AftrHP//nWYxffqG9mp6sWunYmHaOaAOyYsEoQ6Sy/VwwTAOuaw851/C779qGGC1V7/8x/AazedXXB2t1jFzdu/5j9sPmv2DvV97CTNfe5diqdoqoAKFQu04Mu86sE+gwJ8ht7JB/SGXYMEcB4ZwXv/HPZm/+RYrnXvsqW799yYfnejcEIILdz6OK63TdZw64b7Ptf+zd2/Pfvt0Tg1rF0icoCoEy9l0D9IYEys/xeMUAA1PGHOuax3W+sZA/ua2Ur21tZ/f6WYAXQuGuUrds5zNa8OM6eeraPvbEyx97VeEigugDsUBltPXFI4YeQ0rEpM8vvFY0FMMZDJf/Ztxawpw/m2LJ9W1jd/haWad8cjgD4r1bW7r7FvvJ3H7F/toYEi1hfzRLXTqZydBEAxV4lUG3jkF3yKzXL7xVNBVBc8q878Bhbzjs/7/RWQhcApYH/WechgU4CoNBM+uTGoYcj3zhEm5ci2ctfbjQUAOucywY75lsl/4r9m63YnT8yAVCcQwKdVgl0E4AdFVYJAn1iT9DRSAB2yX9OlPxfFCV/ceePVAB2rCHB339UWCXo02CVQFcBUKYOCcJbJaD3ovdUepbfK5oI4PaS35roc03kAqDQkODRNj4k+PqP2DENhgQ6C4AS9iqBNrP8XtFAAPlZ/nzJ/6BLye+MEgKg0JBgtSZDAt0FYEcMCQJdJRAlvx6z/F5RXADFs/zTlfzOKCMAO1OHBIuU3DhkigAo9pCA9t37+RBS6yGdqu3lLzeKCmCmWX6vKCcACq0QqLxKYJIAKFNXCcq/vZheY7Lkd39PLaOgAKxZ/s7pZ/m9oqQAKMWrBIcV2zhkmgDsFFYJyhgSaD3L7xXFBDCbWX6vKCsAOyquEpgqAAqV65P3Esx+4xB9rfaz/F5RRAB2yX+khJLfGeUFQFFt45DJAqAUDwlm83MJpj6X3/01jYgCAqCOP9PGHtloIQBK8SoBDQmiXCUwXQB26IlDAx4bh+ySn77W7TWMSsQC8KPkd0YbAdhxDgmiWCWIiwAo9ioBlfds+/bCKgH9nv7OqFl+r0QkAOcs/x+VUfI7o50AKIVVgq9HMySIkwAoxUOC/obMIkosSn5nIhBA8cYeP0p+Z7QUACXKewniJgA7Ymb/HMXIWX6vhCwAq+T/T39Lfme0FYCd/JDgQqhDgrgKgHKFnzfF7d+MT0gCKGdjj2y0FwAl7FWCOAsg1glBANYsfxkbe2RjhAAoziFBkBuHIICYJmABBDHL7xVjBGAnjFUCCCCmCUgAYZb8zhgnAErQQwIIIKYJQABWyW/P8u8LvuR3xkgBUILcOAQBxDQ+C6CU23f9jrECsENDgo1ThgTlP4QUAohpfBKAVfJ3RlPyO2O8ACh+DwkggJjGBwHkS37xXP4QZvm9EgsBUPzcOAQBxDRlCiCKWX6vxEYAdvxYJYAAYpoSBVCY5X8z+pLfmdgJgFLukAACiGlKEEDUs/xeiaUAKOUMCSCAmEZSACrM8nsltgKwU8qQAAKIaWYpAHuW348n9gSd2AuAUhgSzPL2YgggppmFAOySf5cis/xegQBEZIYEEEBM4yGA4pLf/um7zg6nWiAAR26/vfj2jUMQQEwzjQCi3MtfbiAAl0yuEvzIdUgAAcQ0LgKgjh/kE3uCDgQwTYrvJXDeXgwBxDRFArB/+q7qs/xegQA84lwl6ONDAgggphECGO+aWvL7+ZDOsAMBzCLOjUMXvrQcAohjuACGnnqADXbOY7v/Xc+S3xkIYJYprBI80zf+i6bGS4PNLt8giNEZzK1iH3xjxaVvvp4b/+J+PUt+ZyAAqZAExsb/ctu7G64+unzPtfwz812/WRBzQm1MbX390fo9X/vHxzcsP7Bl3NmRdA0EIJVhlmsbZit3sTo6v4Fc9q+vNGWvX2uO4SOyYxJqW2pjamtq89rDrXX1B9w7k46BAKSSF8C656+tEqeY+Lgx+/Dlpsz79KOxLrl8AyF6htqS2pTaltpYNHeibl/LKghglsRBAMSFNSvu5t8wr9DVAkMC/ZMv+S2hv0JtK5rZAgKQIC4CsOnnZSL/5hmk8aLbNxaifsS8zmB/rt4q+Z1AABLETQDEx7nMIxgS6Bdqq0LJz9tQNOdtQAASxFEAxEcNdXcNWEMCrBLokHzJn2XUZtR2ohldgQAkiKsAbPqbsluxSqB27Fn+/qa6raLZZgQCkCDuAiB+iyGBkpks+Ve9T20kmssTCEACCCAPzSTnhwRYJVAh+ZJ/lVXyO2f5vYAAJIAApsKHBFgliDiFWX7eFqJZpIAAJIAAbgerBNFksuSfeZbfCwhAAgjAHawShJt8yT+7WX4vIAAJIICZmbyXABIIKvYsv72Xv1wgAAkgAG+KhwRu38BI6fGj5HcCAUgAAcwOrBL4m3zJ776Xv1wgAAkgADkGcvVYJSgz9iy/XyW/EwhAAghAHgwJSk8QJb8TCEACCKA0PigMCbBKMJvkS/6sVfLTZyc+xkCAACSAAMqDbknFKsHMoc/G2ssfUMnvBAKQAAIon+IhAb/CuXaCOIY+izBKficQgAQQgD/QTDa/yr2MVYJ88iW/tb7/st+z/F5AABJAAP5Ct6zSDDd987t1jDhESJD28s/q9l2/gQAkgAD8J65DguKSX+b2Xb+BACSAAIKB9rPzDhGbjUN2yU/nXO5e/nKBACSAAIKFNg6ZvkpQmOUv8fZdv4EAJIAAgsfkjUNRzPJ7AQFIAAGEw3XDhgQqlfxOIAAJIIBwmRwS6FsN0LHTOQS1l79cIAAJIIDwuVz0o8rcOpjKKZT8RT+KSzUgAAkggGjQ7fbi4pI/7I09skAAEkAA0aLDKsHkXn73H8WlGhCABBBA9Ki6cYiORcVZfi8gAAkgADVQ7SGkKs/yewEBSAABqAXdMhv1KoE9yx/W7bt+AwFIAAGoR/EqAZXhbp00iNB76TDL7wUEIAEEoCaTqwThDAnyJX/+iT2qz/J7AQFIAAGojb1KcDXAVQJ6bXoPei/xtloDAUgAAahPUKsE9Fo6zvJ7AQFIAAHoweQqgT8bh+xZfnpN3Wb5vYAAJIAA9GLyR5WVvkpgz/IPKHL7rt9AABJAAPpR6pDA1JLfCQQgAQSgJ7KrBPYsP/0f3Wf5vYAAJIAA9GagyfteAvq3fMlvxiy/FxCABBCA/kw3JIhLye8EApAAAjADmsnnHb4wJLBLfvo702b5vYAAJIAAzEJsHBqiqPrEnqCBACSAAMyDyv04lfxOIAAJIABgGhCABBAAMA0IQAIIAJgGBCABBABMAwKQAAIApgEBSAABANOAACSAAIBpQAASQADANCAACSAAYBoQgAQQADANCEACCACYBgQgAQQATAMCkAACAKYBAUgAAQDTgAAkgACAaUAAEkAAwDQgAAkgAGAaEIAEEAAwDQhAAggAmAYEIAEEAEwDApAAAgCmAQFIAAEA04AAJIAAgGlAABJAAMA0IAAJIABgGhCABBAAMA0IQAJLAG1DFyAAYApGCuBAy0eBCGD931z8Hd5pftO464ZLZ9IxEEDcMU4Ar1kVwG/qjvzFHeIUfYSxObmdg31NL95y6Uw6BgKIO8YJ4GArrwA29SVYYo44RX9p3Dm8p/kHEy6dScdAAHHHNAFkD29h9fta9ojT85/GtqGnm34w7tKZdAwEEHeME8DrW1jdqy1Pi9Pzn/U7RpbwznO1sW3EpUPpFggg7hglgPwE4CeZfV9dIk4vGHgV8FMzhgEQQNwxSQBW+b+/5WVxasHR+Py1TGPb6KfUedw7li6BAOKOMQI4wK/+7ZtvrGxvrROnFizrdg7+S/NLzKVT6RQIIO6YIoDsG0+yuv0tPxSnFTxr2gbvzrWN/ErvJUEIIO6YIIDsIav0/1Xdq39ylzitcMjtuJblQ4HLTbtvunQuHQIBxB3dBUDr/pnXNl/O7N+UEacULg0vDH25adenV/SsBCCAuKOzALKHROd/9Ykvi9OJhsa2kYcbd42eteYEeIdy72wqBgKIO1oKgB9v9vCTLNPecjazb/Mj4lSiZc3OS/dwCexp3HXjlrVRSIt9AhBA3NFKAAc2Wxt9Mu2bxzLtrT+ue2XTPeI01CG3e3Qtl8DrvCoYbn5pgpEMGnd/yqw7CEkKSoUfEz8uCCC+WAKwNtCoF7qzL/Naq9Xp6Ypf394yXN/eerh+3+YGcfjqsvaFwS/wTvYsv8oebtw59Mt1O4f6+VV3iGdYnQwP8wpg+NHnr0UzgQIihybPeAUwzK+wqmWIp5/nl/z4DvMr/jMr9z/xBXHYerFhK5u//iW2MLfjk+rcP4xW53YoFH48G7Z+MF8cKogZS/9pw/wVhzZVK5e9m6ofef2JhcvaW+eJQwUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAkkEv8PNZnO2b0fGakAAAAASUVORK5CYII=" InformativeScreenshot="badbea1de48e109b37a9d56c007d5cba.jpg" Selector="&lt;html app='msedge.exe' title='Inbox (2) - trip.planner.rpa@gmail.com - Gmail' /&gt;" Title="Inbox (2) - trip.planner.rpa@gmail.com - Gmail" Url="https://mail.google.com/mail/u/0/#inbox" />
-            </uix:NApplicationCard.TargetApp>
-          </uix:NApplicationCard>
-          <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="" DisplayName="For Each email in the retrieved Emails." sap:VirtualizedContainerService.HintSize="586,830" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[dt_email_addresses]">
-            <ui:ForEach.Body>
-              <ActivityAction x:TypeArguments="snm:MailMessage">
-                <ActivityAction.Argument>
-                  <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="currentEmail" />
-                </ActivityAction.Argument>
-                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="552,613" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="902,4210" sap2010:WorkflowViewState.IdRef="Sequence_8">
                   <Sequence.Variables>
-                    <Variable x:TypeArguments="x:String" Name="EmailAddress" />
+                    <Variable x:TypeArguments="x:String" Name="emailTitle" />
                   </Sequence.Variables>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <If Condition="[currentEmail.Subject = in_filterBy_keyword]" sap:VirtualizedContainerService.HintSize="510,525" sap2010:WorkflowViewState.IdRef="If_1">
-                    <If.Then>
-                      <Sequence sap:VirtualizedContainerService.HintSize="476,343" sap2010:WorkflowViewState.IdRef="Sequence_3">
-                        <sap:WorkflowViewStateService.ViewState>
-                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                          </scg:Dictionary>
-                        </sap:WorkflowViewStateService.ViewState>
-                        <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
-                          <Assign.To>
-                            <OutArgument x:TypeArguments="x:String">[EmailAddress]</OutArgument>
-                          </Assign.To>
-                          <Assign.Value>
-                            <InArgument x:TypeArguments="x:String">[currentEmail.From.Address]</InArgument>
-                          </Assign.Value>
-                        </Assign>
-                        <uasa:AppendItemToList x:TypeArguments="x:String" ItemIndex="{x:Null}" DisplayName="Append Item to List" sap:VirtualizedContainerService.HintSize="434,133" sap2010:WorkflowViewState.IdRef="AppendItemToList`1_2" ItemToAppend="[EmailAddress]" List="[filteredAddresses]" />
-                      </Sequence>
-                    </If.Then>
-                    <If.Else>
-                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4" />
-                    </If.Else>
-                  </If>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="840,143" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Browser Attached.&quot;]" />
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="840,143" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Scan for Emails&quot;]" />
+                  <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text 'SPAN'" sap:VirtualizedContainerService.HintSize="718,107" sap2010:WorkflowViewState.IdRef="GetValue_1">
+                    <ui:GetValue.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="4fbfbc1c-a2bd-405c-acc4-cceb1866bc41" InformativeScreenshot="69403048fad36bb3087f81e669850237" Selector="&lt;html app='msedge.exe' title='Inbox * - trip.planner.rpa@gmail.com - Gmail' /&gt;&lt;webctrl aria-role='grid' tag='TABLE' /&gt;&lt;webctrl aaname='TRIP PLANNER' tableCol='5' tag='SPAN' idx='1' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:GetValue.Target>
+                    <ui:GetValue.Value>
+                      <OutArgument x:TypeArguments="x:String">[emailTitle]</OutArgument>
+                    </ui:GetValue.Value>
+                  </ui:GetValue>
+                  <Sequence DisplayName="Recording Sequence" sap:VirtualizedContainerService.HintSize="718,476" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Edge" DisplayName="Attach Browser 'Inbox4 tr Page'" sap:VirtualizedContainerService.HintSize="484,365" sap2010:WorkflowViewState.IdRef="BrowserScope_2" InformativeScreenshot="74d29d86192f38d26e755d6372c26035" Selector="&lt;html app='msedge.exe' title='Inbox (4) - trip.planner.rpa@gmail.com - Gmail' /&gt;">
+                      <ui:BrowserScope.Body>
+                        <ActivityAction x:TypeArguments="x:Object">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,218" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[ExtractDataTable]" DisplayName="Extract Structured Data ''" ExtractMetadata="&lt;extract-table get_columns_name='1' get_empty_columns='1' columns_name_source='Longest'&gt;&lt;column name='Column-0' attr='fulltext' /&gt;&lt;column name='Column-1' attr='fulltext' /&gt;&lt;column name='Column-2' attr='fulltext' /&gt;&lt;column name='Column-3' attr='fulltext' /&gt;&lt;column name='Column-4' attr='fulltext' /&gt;&lt;column name='Column-5' attr='fulltext' /&gt;&lt;column name='Column-6' attr='fulltext' /&gt;&lt;column name='Column-7' attr='fulltext' /&gt;&lt;column name='Column-8' attr='fulltext' /&gt;&lt;column name='Column-9' attr='fulltext' /&gt;&lt;/extract-table&gt;" sap:VirtualizedContainerService.HintSize="388,107" sap2010:WorkflowViewState.IdRef="ExtractData_2" MaxNumberOfResults="100" SimulateClick="True">
+                              <ui:ExtractData.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="97030ff8-2774-4ac5-8149-0f777d8ceb9e" InformativeScreenshot="be1351312c5f0de0f02155c05e02a18d" Selector="&lt;webctrl aria-role='grid' tag='TABLE' /&gt;" WaitForReady="COMPLETE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </ui:ExtractData.Target>
+                            </ui:ExtractData>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:BrowserScope.Body>
+                    </ui:BrowserScope>
+                  </Sequence>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="718,143" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[ExtractDataTable.Rows.Count.ToString + &quot; elements found.&quot;]" />
+                  <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[ExtractDataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="840,2887" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+                    <ui:ForEachRow.Body>
+                      <ActivityAction x:TypeArguments="sd:DataRow">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="806,2771" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign sap:VirtualizedContainerService.HintSize="744,83" sap2010:WorkflowViewState.IdRef="Assign_3">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[emailTitle]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[CurrentRow("Column-4").ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="744,143" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Element: &quot; +emailTitle]" />
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="622,143" sap2010:WorkflowViewState.IdRef="LogMessage_21" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[&quot;Check if &quot; + emailTitle.Substring(0, 12) + &quot; equals to TRIP PLANNER&quot;]" />
+                          <If Condition="[emailTitle.Substring(0, 12) = &quot;TRIP PLANNER&quot;]" sap:VirtualizedContainerService.HintSize="744,2171" sap2010:WorkflowViewState.IdRef="If_2">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If.Then>
+                              <Sequence sap:VirtualizedContainerService.HintSize="710,1988" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'SPAN'" sap:VirtualizedContainerService.HintSize="668,107" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                  <ui:Click.CursorPosition>
+                                    <ui:CursorPosition Position="Center">
+                                      <ui:CursorPosition.OffsetX>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetX>
+                                      <ui:CursorPosition.OffsetY>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetY>
+                                    </ui:CursorPosition>
+                                  </ui:Click.CursorPosition>
+                                  <ui:Click.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e8df97e4-9813-4ebe-8f6c-b3b5af031923" InformativeScreenshot="20066179c74e3c2e2ddee5050a1d7217" Selector="&lt;html app='msedge.exe' title='Inbox * - trip.planner.rpa@gmail.com - Gmail' /&gt;&lt;webctrl aria-role='grid' tag='TABLE' /&gt;&lt;webctrl aria-labelledby=':*l' tag='TR' /&gt;">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                      <ui:Target.WaitForReady>
+                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                      </ui:Target.WaitForReady>
+                                    </ui:Target>
+                                  </ui:Click.Target>
+                                </ui:Click>
+                                <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'msedge.exe TRIP'" sap:VirtualizedContainerService.HintSize="668,1753" sap2010:WorkflowViewState.IdRef="WindowScope_1" InformativeScreenshot="486b8bc63c068138ae22e74a33b348e5" Selector="&lt;wnd app='msedge.exe' cls='Chrome_WidgetWin_1' title='TRIP PLANNER - trip.planner.rpa@gmail.com - *' /&gt;">
+                                  <ui:WindowScope.Body>
+                                    <ActivityAction x:TypeArguments="x:Object">
+                                      <ActivityAction.Argument>
+                                        <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                      </ActivityAction.Argument>
+                                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="634,1606" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                        <Sequence.Variables>
+                                          <Variable x:TypeArguments="x:String" Name="extractedEmail" />
+                                          <Variable x:TypeArguments="x:String" Name="ExctractedOutput" />
+                                          <Variable x:TypeArguments="x:Int32" Name="Emails" />
+                                        </Sequence.Variables>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <Sequence DisplayName="Sequence Extract the address from the  Email." sap:VirtualizedContainerService.HintSize="572,1495" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                          <Sequence.Variables>
+                                            <Variable x:TypeArguments="x:Boolean" Name="Email_Exists" />
+                                          </Sequence.Variables>
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ui:UiElementExists DisplayName="Element Exists 'SPAN'" Exists="[Email_Exists]" sap:VirtualizedContainerService.HintSize="510,107" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                                            <ui:UiElementExists.Target>
+                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="40f71935-7dfe-48f8-9cac-af46ec38adaa" InformativeScreenshot="c309e5fb0041b358bfb637034f31b011" Selector="&lt;html app='msedge.exe' title='TRIP PLANNER - trip.planner.rpa@gmail.com - Gmail' /&gt;&lt;webctrl class='go' tableRow='*' tag='SPAN' /&gt;">
+                                                <ui:Target.TimeoutMS>
+                                                  <InArgument x:TypeArguments="x:Int32" />
+                                                </ui:Target.TimeoutMS>
+                                                <ui:Target.WaitForReady>
+                                                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                </ui:Target.WaitForReady>
+                                              </ui:Target>
+                                            </ui:UiElementExists.Target>
+                                          </ui:UiElementExists>
+                                          <If Condition="[Email_Exists]" sap:VirtualizedContainerService.HintSize="510,1237" sap2010:WorkflowViewState.IdRef="If_3">
+                                            <If.Then>
+                                              <Sequence sap:VirtualizedContainerService.HintSize="476,859" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text 'SPAN'" sap:VirtualizedContainerService.HintSize="434,107" sap2010:WorkflowViewState.IdRef="GetValue_2">
+                                                  <ui:GetValue.Target>
+                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="193183ad-e504-45de-ad98-195f27066495" InformativeScreenshot="e5451bbf6f54afb57be09a1c53cbf6aa" Selector="&lt;html app='msedge.exe' title='TRIP PLANNER - trip.planner.rpa@gmail.com - Gmail' /&gt;&lt;webctrl class='go' tableRow='*' tag='SPAN' /&gt;">
+                                                      <ui:Target.TimeoutMS>
+                                                        <InArgument x:TypeArguments="x:Int32" />
+                                                      </ui:Target.TimeoutMS>
+                                                      <ui:Target.WaitForReady>
+                                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                      </ui:Target.WaitForReady>
+                                                    </ui:Target>
+                                                  </ui:GetValue.Target>
+                                                  <ui:GetValue.Value>
+                                                    <OutArgument x:TypeArguments="x:String">[extractedEmail]</OutArgument>
+                                                  </ui:GetValue.Value>
+                                                </ui:GetValue>
+                                                <Assign sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_2">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[extractedEmail]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">[extractedEmail.Substring(1, extractedEmail.Length - 2)]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,143" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Extracted email: &quot;+extractedEmail]" />
+                                                <uasa:AppendItemToList x:TypeArguments="x:String" DisplayName="Append Item to List" sap:VirtualizedContainerService.HintSize="434,135" sap2010:WorkflowViewState.IdRef="AppendItemToList`1_6" ItemIndex="[Emails]" ItemToAppend="[extractedEmail]" List="[emailsList]" />
+                                                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,143" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Item : &quot;+extractedEmail+&quot; added to a list. The list contains following items: &quot;+emailsList.ToString]" />
+                                              </Sequence>
+                                            </If.Then>
+                                            <If.Else>
+                                              <Sequence sap:VirtualizedContainerService.HintSize="376,195" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'DIV'" sap:VirtualizedContainerService.HintSize="334,107" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                                  <ui:Click.CursorPosition>
+                                                    <ui:CursorPosition Position="Center">
+                                                      <ui:CursorPosition.OffsetX>
+                                                        <InArgument x:TypeArguments="x:Int32" />
+                                                      </ui:CursorPosition.OffsetX>
+                                                      <ui:CursorPosition.OffsetY>
+                                                        <InArgument x:TypeArguments="x:Int32" />
+                                                      </ui:CursorPosition.OffsetY>
+                                                    </ui:CursorPosition>
+                                                  </ui:Click.CursorPosition>
+                                                  <ui:Click.Target>
+                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="6d316c5b-4671-4f55-97a9-819ebb3bf787" InformativeScreenshot="63078a2bad8e5fc829c91165398d7d81" Selector="&lt;html app='msedge.exe' title='TRIP PLANNER - trip.planner.rpa@gmail.com - Gmail' /&gt;&lt;webctrl idx='*' tag='DIV' /&gt;">
+                                                      <ui:Target.TimeoutMS>
+                                                        <InArgument x:TypeArguments="x:Int32" />
+                                                      </ui:Target.TimeoutMS>
+                                                      <ui:Target.WaitForReady>
+                                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                      </ui:Target.WaitForReady>
+                                                    </ui:Target>
+                                                  </ui:Click.Target>
+                                                </ui:Click>
+                                              </Sequence>
+                                            </If.Else>
+                                          </If>
+                                        </Sequence>
+                                      </Sequence>
+                                    </ActivityAction>
+                                  </ui:WindowScope.Body>
+                                </ui:WindowScope>
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_11" />
+                            </If.Else>
+                          </If>
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEachRow.Body>
+                  </ui:ForEachRow>
                 </Sequence>
               </ActivityAction>
-            </ui:ForEach.Body>
+            </ui:WindowScope.Body>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-          </ui:ForEach>
-          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="586,468" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[filteredAddresses]">
-            <ui:ForEach.Body>
-              <ActivityAction x:TypeArguments="x:String">
-                <ActivityAction.Argument>
-                  <DelegateInArgument x:TypeArguments="x:String" Name="email" />
-                </ActivityAction.Argument>
-                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,282" sap2010:WorkflowViewState.IdRef="Sequence_5">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item 'Email' to the queue." FolderPath="[in_OrchestratorQueueFolder]" sap:VirtualizedContainerService.HintSize="334,194" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[in_OrchestratorQueueName]">
-                    <ui:AddQueueItem.ItemInformation>
-                      <InArgument x:TypeArguments="x:String" x:Key="Email">[email]</InArgument>
-                    </ui:AddQueueItem.ItemInformation>
-                  </ui:AddQueueItem>
-                </Sequence>
-              </ActivityAction>
-            </ui:ForEach.Body>
-          </ui:ForEach>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="586,141" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="[UiPath.Core.Activities.LogLevel.Trace]" Message="[dt_email_addresses.Count.ToString+&quot; scaned, &quot;+ filteredAddresses.Count.ToString + &quot; matching elements found.&quot;]" />
+          </ui:WindowScope>
+          <Sequence DisplayName="Sequence Send emalls list to the Orchestrator" sap:VirtualizedContainerService.HintSize="814,83" sap2010:WorkflowViewState.IdRef="Sequence_18">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="" DisplayName="For Each email in the retrieved Emails." sap:VirtualizedContainerService.HintSize="388,84" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[dt_email_addresses]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="snm:MailMessage">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="currentEmail" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,271" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="EmailAddress" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If Condition="[currentEmail.Subject = in_filterBy_keyword]" sap:VirtualizedContainerService.HintSize="334,183" sap2010:WorkflowViewState.IdRef="If_1">
+                      <If.Then>
+                        <Sequence sap:VirtualizedContainerService.HintSize="476,346" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign sap:VirtualizedContainerService.HintSize="434,83" sap2010:WorkflowViewState.IdRef="Assign_1">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[EmailAddress]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[currentEmail.From.Address]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <uasa:AppendItemToList x:TypeArguments="x:String" ItemIndex="{x:Null}" DisplayName="Append Item to List" sap:VirtualizedContainerService.HintSize="434,135" sap2010:WorkflowViewState.IdRef="AppendItemToList`1_2" ItemToAppend="[EmailAddress]" List="[emailsList]" />
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4" />
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEach.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ForEach>
+            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="388,53" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[filteredAddresses]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="x:String">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:String" Name="email" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,284" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item 'Email' to the queue." FolderPath="[in_OrchestratorQueueFolder]" sap:VirtualizedContainerService.HintSize="334,196" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[in_OrchestratorQueueName]">
+                      <ui:AddQueueItem.ItemInformation>
+                        <InArgument x:TypeArguments="x:String" x:Key="Email">[email]</InArgument>
+                      </ui:AddQueueItem.ItemInformation>
+                    </ui:AddQueueItem>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEach.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ForEach>
+          </Sequence>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="814,143" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[dt_email_addresses.Count.ToString+&quot; scaned, &quot;+ filteredAddresses.Count.ToString + &quot; matching elements found.&quot;]" />
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:NullReferenceException" sap:VirtualizedContainerService.HintSize="652,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+        <Catch x:TypeArguments="s:NullReferenceException" sap:VirtualizedContainerService.HintSize="804,22" sap2010:WorkflowViewState.IdRef="Catch`1_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -266,10 +540,10 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:NullReferenceException" Name="exception" />
             </ActivityAction.Argument>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[&quot;Folder not found!&quot;]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,143" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="[UiPath.Core.Activities.LogLevel.Error]" Message="[&quot;Folder not found!&quot;]" />
           </ActivityAction>
         </Catch>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="652,21" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="804,22" sap2010:WorkflowViewState.IdRef="Catch`1_3">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -280,7 +554,7 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[&quot;An Error occured in during retrieving email from input box! &quot;+exception.Message]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,143" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="[UiPath.Core.Activities.LogLevel.Warn]" Message="[&quot;An Error occured in during retrieving email from input box! &quot;+exception.Message]" />
           </ActivityAction>
         </Catch>
       </TryCatch.Catches>
